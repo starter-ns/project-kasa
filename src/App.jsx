@@ -1,35 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet, NavLink } from 'react-router-dom'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'16px 24px'}}>
+        <NavLink to="/" aria-label="Kasa home" style={{fontWeight:700,color:'#ff6060',textDecoration:'none'}}>Kasa</NavLink>
+        <nav style={{display:'flex',gap:16}}>
+          <NavLink to="/" end>Accueil</NavLink>
+          <NavLink to="/about">À propos</NavLink>
+        </nav>
+      </header>
+
+      <main style={{maxWidth:1240,margin:'0 auto',padding:'0 20px 40px'}}>
+        <Outlet />
+      </main>
+
+      <footer style={{background:'#000',color:'#fff',textAlign:'center',padding:'32px 16px'}}>
+        © {new Date().getFullYear()} Kasa
+      </footer>
     </>
   )
 }
-
-export default App
