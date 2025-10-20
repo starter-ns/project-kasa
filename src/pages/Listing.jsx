@@ -6,7 +6,7 @@ export default function Listing() {
   const [listing, setListing] = useState(undefined) // undefined = loading; null = not found
 
   useEffect(() => {
-    fetch('/data/logements.json')
+    fetch('/assets/data.json')
       .then(r => r.json())
       .then(all => setListing(all.find(x => x.id === id) ?? null))
       .catch(() => setListing(null))
