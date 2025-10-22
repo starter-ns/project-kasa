@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom'
-import logo from './assets/kasa.svg'           // header (red)
+import logo from './assets/phoneLogo.svg'           // header (red)
 import whiteLogo from './assets/white-logo.svg' // footer (white)
 
 export default function App() {
@@ -14,28 +14,30 @@ export default function App() {
         }}
       >
         <NavLink to="/" aria-label="Kasa home" style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <img src={logo} alt="Kasa" style={{ height: 42 }} />
+          <img src={logo} alt="Kasa" style={{ height: 46.88, width: 145, }} />
         </NavLink>
 
         <nav style={{ display: 'flex', gap: 16 }}>
           <NavLink to="/" end style={({ isActive }) => ({
             textDecoration: isActive ? 'underline' : 'none',
-            color: '#ff6060',
+            color: '#000000ff',
             fontWeight: 500,
+            fontSize: 12,
           })}>
             Home
           </NavLink>
           <NavLink to="/about" style={({ isActive }) => ({
             textDecoration: isActive ? 'underline' : 'none',
-            color: '#ff6060',
+            color: '#000000ff',
             fontWeight: 500,
+            fontSize: 12,
           })}>
             About
           </NavLink>
         </nav>
       </header>
 
-      <main style={{ maxWidth: 1240, margin: '0 auto', padding: '0 20px 40px' }}>
+      <main style={{ maxWidth: 1240, margin: '0 auto', }}>
         <Outlet />
       </main>
 
