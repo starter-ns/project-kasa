@@ -1,11 +1,11 @@
 // src/components/ListingCard.jsx
 import { Link } from "react-router-dom";
 
-export default function ListingCard({ id, title }) {
+export default function ListingCard({ id, title, cover }) {
   return (
     <Link
       to={`/listing/${id}`}
-      style={{ textDecoration: "none" }}
+      style={{ textDecoration: "none", color: "inherit" }}
     >
       <article
         style={{
@@ -13,10 +13,7 @@ export default function ListingCard({ id, title }) {
           height: 180,
           borderRadius: 12,
           overflow: "hidden",
-          // gradient background (light top → darker bottom)
-          background:
-            "linear-gradient(180deg, #ff7b7b 0%, #ff6060 45%, #e14e4e 100%)",
-          // subtle depth + smooth hover
+          backgroundColor: "#FF6060", // your brand red base
           boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
           transition: "transform .2s ease, box-shadow .2s ease",
         }}
@@ -29,8 +26,32 @@ export default function ListingCard({ id, title }) {
           e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.1)";
         }}
       >
+        {/* Optional cover image */}
+        {cover && (
+          <img
+            src={cover}
+            alt={title}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        )}
 
-        {/* title at the bottom-left */}
+        {/* your dark gradient overlay on top */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(10,10,10,0) 42%, rgba(4,4,4,0.205) 99.99%, rgba(0,0,0,0.5) 100%)",
+          }}
+        />
+
+        {/* title text */}
         <div
           style={{
             position: "absolute",
@@ -45,12 +66,6 @@ export default function ListingCard({ id, title }) {
         >
           {title}
         </div>
-
-        {/* focus ring for keyboard accessibility */}
-        <span
-          className="sr-only"
-          style={{ position: "absolute", inset: 0 }}
-        />
       </article>
     </Link>
   );
