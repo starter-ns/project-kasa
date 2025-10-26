@@ -16,7 +16,7 @@ export default function Footer() {
         alt="Kasa"
         style={{ height: 30, marginBottom: 8 }}
       />
-      <p>© {new Date().getFullYear()} Kasa. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} Kasa. All rights reserved</p>
     </footer>
   );
 }

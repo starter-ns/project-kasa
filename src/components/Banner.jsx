@@ -48,7 +48,6 @@ export default function Banner({ title, imageUrl, width = 335 }) {
             fontWeight: 700,
             lineHeight: 1.1,
             fontSize: 24,
-            textShadow: "0 2px 8px rgba(0,0,0,.35)",
           }}
         >
           {title}

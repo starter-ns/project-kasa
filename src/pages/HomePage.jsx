@@ -29,12 +29,27 @@ export default function HomePage() {
         }}
       >
         {items.length === 0 ? (
-          <p style={{ textAlign: "center", color: "#999" }}>No listings found.</p>
-        ) : (
-          items.map((l) => (
-            <ListingCard key={l.id} id={l.id} title={l.title} />
-          ))
-        )}
+  <p style={{ textAlign: "center", color: "#999" }}>No listings found.</p>
+) : (
+  items.map((l) => {
+    // pick a cover from common keys in your JSON
+    const cover =
+      (typeof l.cover === "string" && l.cover) ||
+      (typeof l.image === "string" && l.image) ||
+      (Array.isArray(l.pictures) && l.pictures[0]) ||
+      "";
+
+    return (
+      <ListingCard
+        key={l.id}
+        id={l.id}
+        title={l.title}
+        cover={cover}               
+      />
+    );
+  })
+)}
+
       </div>
     </section>
   );
