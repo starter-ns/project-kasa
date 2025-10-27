@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import RentalPropertyCard from "../components/RentalPropertyCard.jsx";
 
-export default function Listing() {
+export default function ListingPage() {
   const { id } = useParams(); // string
   const [listing, setListing] = useState(undefined); // undefined = loading; null = not found
 
