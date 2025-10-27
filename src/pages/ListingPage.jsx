@@ -1,7 +1,7 @@
 // src/pages/Listing.jsx
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RentalPropertyCard from "../components/RentalPropertyCard.jsx";
+import RentalPropertyCard from "./RentalPropertyCard.jsx";
 
 export default function ListingPage() {
   const { id } = useParams(); // string
@@ -31,11 +31,24 @@ export default function ListingPage() {
     "";
 
   return (
-    <RentalPropertyCard
-      title={listing.title}
-      location={listing.location}
-      description={listing.description}
-      imageUrl={imageUrl}
-    />
-  );
+  <RentalPropertyCard
+    title={listing.title}
+    location={listing.location}
+    description={listing.description}
+    imageUrl={
+      (Array.isArray(listing.pictures) && listing.pictures[0]) ||
+      listing.cover ||
+      listing.image ||
+      ""
+    }
+    rating={listing.rating}
+    tags={listing.tags}
+    equipments={listing.equipments}
+    hostName={listing.host?.name}        // 👈 add
+    hostPicture={listing.host?.picture}  // 👈 add
+    pictures={listing.pictures}
+  />
+);
+
+
 }
