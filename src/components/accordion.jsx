@@ -1,4 +1,5 @@
-// src/components/Accordion.jsx
+import "../styles/Accordion.scss";
+
 export default function Accordion({
   title,
   open,
@@ -9,31 +10,19 @@ export default function Accordion({
   children,
 }) {
   return (
-    <section style={{ marginTop: 10 }}>
+    <section className="accordion">
       <button
+        className="accordion__button"
         onClick={onToggle}
         aria-expanded={open}
-        style={{
-          width: "100%",
-          background: color,
-          color: "#fff",
-          border: "none",
-          borderRadius: 8,
-          padding: "12px 14px",
-          fontWeight: 600,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          cursor: "pointer",
-          gap: 10,
-        }}
+        style={{ background: color }}
       >
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+        <span className="accordion__left">
           {leftIcon && (
             <img
               src={leftIcon}
               alt=""
-              style={{ width: 16, height: 16 }}
+              className="accordion__left-icon"
             />
           )}
           {title}
@@ -43,35 +32,17 @@ export default function Accordion({
           <img
             src={caretIcon}
             alt=""
-            style={{
-              width: 12,
-              height: 12,
-              transform: `rotate(${open ? 180 : 0}deg)`,
-              transition: "transform .2s",
-            }}
+            className={`accordion__caret ${open ? "accordion__caret--open" : ""}`}
           />
         )}
       </button>
 
       <div
-        style={{
-          maxHeight: open ? 600 : 0,
-          overflow: "hidden",
-          transition: "max-height .25s ease",
-          background: "#f9f9f9",
-          borderRadius: "0 0 8px 8px",
-        }}
+        className="accordion__panel-wrapper"
+        style={{ maxHeight: open ? 600 : 0 }}
       >
         {open && (
-          <div
-            style={{
-              padding: "12px 14px",
-              color: "#000",
-              fontSize: 14,
-              fontWeight: 500,
-              lineHeight: "143%",
-            }}
-          >
+          <div className="accordion__panel">
             {children}
           </div>
         )}

@@ -1,4 +1,3 @@
-// src/components/RentalPropertyCard.jsx
 import { useMemo, useRef, useState, useEffect } from "react";
 
 import Vector from "../assets/Vector.svg";
@@ -7,6 +6,8 @@ import ArrowNext from "../assets/arrow_forward.svg";
 
 import RatingStars from "./ratingStars.jsx";
 import Accordion from "./accordion.jsx";
+
+import "../styles/RentalPropertyCard.scss";
 
 export default function RentalPropertyCard({
   title,
@@ -77,7 +78,7 @@ export default function RentalPropertyCard({
     }));
 
   return (
-    <article style={{ padding: 16, maxWidth: 360, margin: "0 auto" }}>
+    <article className="rental-card">
       {/* Image slider */}
       <div
         ref={boxRef}
@@ -85,16 +86,7 @@ export default function RentalPropertyCard({
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
         aria-label="Property pictures"
-        style={{
-          width: 335,
-          height: 255,
-          borderRadius: 12,
-          overflow: "hidden",
-          margin: "12px 0",
-          position: "relative",
-          background: "#f6f6f6",
-          outline: "none",
-        }}
+        className="rental-card__slider"
       >
         {total > 0 && (
           <>
@@ -102,25 +94,13 @@ export default function RentalPropertyCard({
               key={slides[index]}
               src={slides[index]}
               alt={`${title || "Property"} – image ${index + 1}`}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
+              className="rental-card__slider-img"
             />
 
             {/* bottom gradient overlay */}
             <div
               aria-hidden="true"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(10,10,10,0) 42%, rgba(4,4,4,0.205) 99.99%, rgba(0,0,0,0.5) 100%)",
-              }}
+              className="rental-card__slider-gradient"
             />
 
             {/* arrows only if >1 image */}
@@ -129,24 +109,24 @@ export default function RentalPropertyCard({
                 <button
                   aria-label="Previous image"
                   onClick={prev}
-                  style={bareArrow("left")}
+                  className="rental-card__slider-arrow rental-card__slider-arrow--left"
                 >
                   <img
                     src={ArrowPrev}
                     alt="Previous"
-                    style={{ width: 20, height: 20 }}
+                    className="rental-card__slider-arrow-icon"
                   />
                 </button>
 
                 <button
                   aria-label="Next image"
                   onClick={next}
-                  style={bareArrow("right")}
+                  className="rental-card__slider-arrow rental-card__slider-arrow--right"
                 >
                   <img
                     src={ArrowNext}
                     alt="Next"
-                    style={{ width: 20, height: 20 }}
+                    className="rental-card__slider-arrow-icon"
                   />
                 </button>
               </>
@@ -156,53 +136,15 @@ export default function RentalPropertyCard({
       </div>
 
       {/* Title + location */}
-      <h1
-        style={{
-          color: "#FF6060",
-          margin: "0 0 6px",
-          fontWeight: 500,
-          fontSize: 18,
-          lineHeight: 1.25,
-        }}
-      >
-        {title}
-      </h1>
+      <h1 className="rental-card__title">{title}</h1>
 
-      <p
-        style={{
-          margin: "0 0 12px",
-          color: "#000",
-          fontWeight: 500,
-          fontSize: 14,
-          lineHeight: "143%",
-        }}
-      >
-        {location}
-      </p>
+      <p className="rental-card__location">{location}</p>
 
       {/* Tags */}
       {Array.isArray(tags) && tags.length > 0 && (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 8,
-            marginBottom: 12,
-          }}
-        >
+        <div className="rental-card__tags">
           {tags.map((tag, i) => (
-            <span
-              key={`${tag}-${i}`}
-              style={{
-                background: "#FF6060",
-                color: "#fff",
-                borderRadius: 10,
-                padding: "6px 10px",
-                fontSize: 12,
-                fontWeight: 600,
-                lineHeight: 1,
-              }}
-            >
+            <span key={`${tag}-${i}`} className="rental-card__tag-pill">
               {tag}
             </span>
           ))}
@@ -210,34 +152,14 @@ export default function RentalPropertyCard({
       )}
 
       {/* Rating + host row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 12,
-        }}
-      >
+      <div className="rental-card__row">
         {/* Rating using the extracted component */}
         <RatingStars rating={rating} />
 
         {/* Host info */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-          }}
-        >
+        <div className="rental-card__host">
           {hostName && (
-            <span
-              style={{
-                fontSize: 14,
-                fontWeight: 600,
-                color: "#000",
-                textAlign: "right",
-              }}
-            >
+            <span className="rental-card__host-name">
               {hostName}
             </span>
           )}
@@ -246,13 +168,7 @@ export default function RentalPropertyCard({
             <img
               src={normalizeUrl(hostPicture)}
               alt={hostName || "Host"}
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: "50%",
-                objectFit: "cover",
-                display: "block",
-              }}
+              className="rental-card__host-avatar"
             />
           )}
         </div>
@@ -264,8 +180,6 @@ export default function RentalPropertyCard({
         open={open.desc}
         onToggle={() => toggle("desc")}
         color="#FF6060"
-        // left icon OFF for now (since you removed leftIcon usage in your version)
-        // but we still pass caret arrow icon:
         caretIcon={Vector}
       >
         {description || "—"}
@@ -280,14 +194,11 @@ export default function RentalPropertyCard({
         caretIcon={Vector}
       >
         {Array.isArray(equipments) && equipments.length > 0 ? (
-          <ul style={{ margin: 0, paddingLeft: 18 }}>
+          <ul className="rental-card__equip-list">
             {equipments.map((item, idx) => (
               <li
                 key={`${item}-${idx}`}
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.4,
-                }}
+                className="rental-card__equip-item"
               >
                 {item}
               </li>
@@ -299,24 +210,4 @@ export default function RentalPropertyCard({
       </Accordion>
     </article>
   );
-}
-
-// --- slider arrow buttons (simple + clean) ---
-function bareArrow(side) {
-  return {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    [side]: 8,
-    width: 28,
-    height: 28,
-    padding: 0,
-    margin: 0,
-    border: "none",
-    background: "transparent",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
 }

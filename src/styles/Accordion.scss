@@ -1,0 +1,52 @@
+.accordion {
+  margin-top: 10px;
+
+  &__button {
+    width: 100%;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 10px;
+  }
+
+  &__left {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__left-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__caret {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.2s;
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__panel-wrapper {
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    background: #f9f9f9;
+    border-radius: 0 0 8px 8px;
+  }
+
+  &__panel {
+    padding: 12px 14px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 143%;
+  }
+}
