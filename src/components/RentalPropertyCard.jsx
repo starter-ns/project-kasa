@@ -1,24 +1,12 @@
+// src/components/RentalPropertyCard.jsx
 import { useMemo, useRef, useState, useEffect } from "react";
 
-// ✅ your icons from src/assets
 import Vector from "../assets/Vector.svg";
 import ArrowPrev from "../assets/arrow_previous.svg";
 import ArrowNext from "../assets/arrow_forward.svg";
-import StarRed from "../assets/ratingStar-red.svg";
-import StarGray from "../assets/ratingStar-grey.svg";
 
-// --- simple Star component (picks correct SVG) ---
-function Star({ filled, size = 18 }) {
-  return (
-    <img
-      src={filled ? StarRed : StarGray}
-      alt="Rating star"
-      width={size}
-      height={size}
-      style={{ display: "inline-block" }}
-    />
-  );
-}
+import RatingStars from "./ratingStars.jsx";
+import Accordion from "./accordion.jsx";
 
 export default function RentalPropertyCard({
   title,
@@ -32,6 +20,7 @@ export default function RentalPropertyCard({
   hostPicture,
   pictures = [],
 }) {
+  // build correct asset URLs
   const normalizeUrl = (path) => {
     if (!path) return "";
     const s = String(path).trim();
@@ -40,6 +29,7 @@ export default function RentalPropertyCard({
     return `${import.meta.env.BASE_URL}${s.replace(/^\/+/, "")}`;
   };
 
+  // slideshow images (array)
   const slides = useMemo(() => {
     const arr =
       Array.isArray(pictures) && pictures.length > 0
@@ -52,13 +42,13 @@ export default function RentalPropertyCard({
 
   const [index, setIndex] = useState(0);
   const total = slides.length;
-  const r = Math.max(0, Math.min(5, Number(rating) || 0));
 
   const prev = () => setIndex((i) => (i - 1 + total) % total);
   const next = () => setIndex((i) => (i + 1) % total);
 
-  // keyboard + swipe
+  // keyboard nav + swipe for slider
   const boxRef = useRef(null);
+
   useEffect(() => {
     const el = boxRef.current;
     if (!el) return;
@@ -78,12 +68,17 @@ export default function RentalPropertyCard({
     if (dx < -50) next();
   };
 
+  // accordions open state
   const [open, setOpen] = useState({ desc: false, equip: false });
-  const toggle = (key) => setOpen((o) => ({ ...o, [key]: !o[key] }));
+  const toggle = (key) =>
+    setOpen((o) => ({
+      ...o,
+      [key]: !o[key],
+    }));
 
   return (
     <article style={{ padding: 16, maxWidth: 360, margin: "0 auto" }}>
-      {/* Slider */}
+      {/* Image slider */}
       <div
         ref={boxRef}
         tabIndex={0}
@@ -117,7 +112,7 @@ export default function RentalPropertyCard({
               }}
             />
 
-            {/* bottom shadow gradient */}
+            {/* bottom gradient overlay */}
             <div
               aria-hidden="true"
               style={{
@@ -128,14 +123,31 @@ export default function RentalPropertyCard({
               }}
             />
 
-            {/* slider arrows */}
+            {/* arrows only if >1 image */}
             {total > 1 && (
               <>
-                <button aria-label="Previous image" onClick={prev} style={bareArrow("left")}>
-                  <img src={ArrowPrev} alt="Previous" style={{ width: 20, height: 20 }} />
+                <button
+                  aria-label="Previous image"
+                  onClick={prev}
+                  style={bareArrow("left")}
+                >
+                  <img
+                    src={ArrowPrev}
+                    alt="Previous"
+                    style={{ width: 20, height: 20 }}
+                  />
                 </button>
-                <button aria-label="Next image" onClick={next} style={bareArrow("right")}>
-                  <img src={ArrowNext} alt="Next" style={{ width: 20, height: 20 }} />
+
+                <button
+                  aria-label="Next image"
+                  onClick={next}
+                  style={bareArrow("right")}
+                >
+                  <img
+                    src={ArrowNext}
+                    alt="Next"
+                    style={{ width: 20, height: 20 }}
+                  />
                 </button>
               </>
             )}
@@ -144,16 +156,40 @@ export default function RentalPropertyCard({
       </div>
 
       {/* Title + location */}
-      <h1 style={{ color: "#FF6060", margin: "0 0 6px", fontWeight: 500, fontSize: 18, lineHeight: 1.25 }}>
+      <h1
+        style={{
+          color: "#FF6060",
+          margin: "0 0 6px",
+          fontWeight: 500,
+          fontSize: 18,
+          lineHeight: 1.25,
+        }}
+      >
         {title}
       </h1>
-      <p style={{ margin: "0 0 12px", color: "#000", fontWeight: 500, fontSize: 14, lineHeight: "143%" }}>
+
+      <p
+        style={{
+          margin: "0 0 12px",
+          color: "#000",
+          fontWeight: 500,
+          fontSize: 14,
+          lineHeight: "143%",
+        }}
+      >
         {location}
       </p>
 
       {/* Tags */}
       {Array.isArray(tags) && tags.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 8,
+            marginBottom: 12,
+          }}
+        >
           {tags.map((tag, i) => (
             <span
               key={`${tag}-${i}`}
@@ -173,43 +209,69 @@ export default function RentalPropertyCard({
         </div>
       )}
 
-      {/* Rating + host */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-        {/* Rating stars (using pre-colored SVGs) */}
-        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <Star key={n} filled={n <= r} />
-          ))}
-        </div>
+      {/* Rating + host row */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 12,
+        }}
+      >
+        {/* Rating using the extracted component */}
+        <RatingStars rating={rating} />
 
         {/* Host info */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+          }}
+        >
           {hostName && (
-            <span style={{ fontSize: 14, fontWeight: 600, color: "#000", textAlign: "right" }}>
+            <span
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#000",
+                textAlign: "right",
+              }}
+            >
               {hostName}
             </span>
           )}
+
           {hostPicture && (
             <img
               src={normalizeUrl(hostPicture)}
               alt={hostName || "Host"}
-              style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover", display: "block" }}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: "50%",
+                objectFit: "cover",
+                display: "block",
+              }}
             />
           )}
         </div>
       </div>
 
-      {/* Accordions */}
+      {/* Description accordion */}
       <Accordion
         title="Description"
         open={open.desc}
         onToggle={() => toggle("desc")}
         color="#FF6060"
+        // left icon OFF for now (since you removed leftIcon usage in your version)
+        // but we still pass caret arrow icon:
         caretIcon={Vector}
       >
         {description || "—"}
       </Accordion>
 
+      {/* Amenities accordion */}
       <Accordion
         title="Amenities"
         open={open.equip}
@@ -220,7 +282,13 @@ export default function RentalPropertyCard({
         {Array.isArray(equipments) && equipments.length > 0 ? (
           <ul style={{ margin: 0, paddingLeft: 18 }}>
             {equipments.map((item, idx) => (
-              <li key={`${item}-${idx}`} style={{ fontSize: 14, lineHeight: 1.4 }}>
+              <li
+                key={`${item}-${idx}`}
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.4,
+                }}
+              >
                 {item}
               </li>
             ))}
@@ -230,74 +298,6 @@ export default function RentalPropertyCard({
         )}
       </Accordion>
     </article>
-  );
-}
-
-// --- Accordion subcomponent ---
-function Accordion({ title, open, onToggle, color = "#FF6060", leftIcon, caretIcon, children }) {
-  return (
-    <section style={{ marginTop: 10 }}>
-      <button
-        onClick={onToggle}
-        aria-expanded={open}
-        style={{
-          width: "100%",
-          background: color,
-          color: "#fff",
-          border: "none",
-          borderRadius: 8,
-          padding: "12px 14px",
-          fontWeight: 600,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          cursor: "pointer",
-          gap: 10,
-        }}
-      >
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-          {leftIcon && <img src={leftIcon} alt="" style={{ width: 16, height: 16 }} />}
-          {title}
-        </span>
-
-        {caretIcon && (
-          <img
-            src={caretIcon}
-            alt=""
-            style={{
-              width: 12,
-              height: 12,
-              transform: `rotate(${open ? 180 : 0}deg)`,
-              transition: "transform .2s",
-            }}
-          />
-        )}
-      </button>
-
-      <div
-        style={{
-          maxHeight: open ? 600 : 0,
-          overflow: "hidden",
-          transition: "max-height .25s ease",
-          background: "#f9f9f9",
-          borderRadius: "0 0 8px 8px",
-        }}
-      >
-        {open && (
-          <div
-            style={{
-              padding: "12px 14px",
-              color: "#000",
-              fontSize: 14,
-              fontWeight: 500,
-              lineHeight: "143%",
-            }}
-          >
-            {children}
-          </div>
-        )}
-      </div>
-    </section>
   );
 }
 
