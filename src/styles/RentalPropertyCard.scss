@@ -137,3 +137,37 @@
     line-height: 1.4;
   }
 }
+/* Desktop overrides */
+@media (min-width: 1024px) {
+  .rental-card {
+    width: 1240px;        /* <-- fix: pxpx -> px */
+    margin: 0 auto;       /* keep centered */
+
+    &__slider {
+      width: 100%;        /* match card width */
+      height: 415px;      /* like your mock */
+      border-radius: 25px;
+      margin: 24px 0;
+      overflow: hidden;
+    }
+
+    &__title { font-size: 36px; margin-bottom: 8px; }
+    &__location { font-size: 18px; margin-bottom: 16px; }
+
+    /* header row under slider: left/right spacing */
+    &__row {
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* tags a bit bigger */
+    &__tag-pill { font-size: 14px; padding: 8px 18px; }
+
+    /* host on the right, bigger avatar */
+    &__host { flex-direction: row-reverse; gap: 12px; }
+    &__host-name { font-size: 18px; line-height: 1.2; max-width: 140px; }
+    &__host-avatar { width: 64px; height: 64px; }
+  }
+}
