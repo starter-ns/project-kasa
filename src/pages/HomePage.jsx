@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Banner from "../components/Banner.jsx";
 import ListingCard from "../components/ListingCard.jsx";
 import bannerPic from "../assets/bannerPic.jpg";
+import "../styles/HomePage.scss";
 
 export default function HomePage() {
   const [items, setItems] = useState([]);
@@ -18,38 +19,41 @@ export default function HomePage() {
   }, []);
 
   return (
-    <section style={{ display: "grid", gap: 24, padding: "0" }}>
-      <Banner title="At home, everywhere, and anywhere" imageUrl={bannerPic} height={220} />
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-          gap: 24,
-          padding: "24px 0",
-        }}
-      >
+    <section className="home">
+      {/* hero / banner */}
+      <div className="home__banner-wrapper">
+  <Banner
+    title="At home, everywhere, and anywhere"
+    imageUrl={bannerPic}
+  />
+</div>
+
+      {/* listings */}
+      <div className="home__cards-area">
         {items.length === 0 ? (
-  <p style={{ textAlign: "center", color: "#999" }}>No listings found.</p>
-) : (
-  items.map((l) => {
-    // pick a cover from common keys in your JSON
-    const cover =
-      (typeof l.cover === "string" && l.cover) ||
-      (typeof l.image === "string" && l.image) ||
-      (Array.isArray(l.pictures) && l.pictures[0]) ||
-      "";
+          <p className="home__empty">No listings found.</p>
+        ) : (
+          <div className="home__grid">
+            {items.map((l) => {
+              // pick a cover from common keys in your JSON
+              const cover =
+                (typeof l.cover === "string" && l.cover) ||
+                (typeof l.image === "string" && l.image) ||
+                (Array.isArray(l.pictures) && l.pictures[0]) ||
+                "";
 
-    return (
-      <ListingCard
-        key={l.id}
-        id={l.id}
-        title={l.title}
-        cover={cover}               
-      />
-    );
-  })
-)}
-
+              return (
+                <div className="home__card-wrapper" key={l.id}>
+                  <ListingCard
+                    id={l.id}
+                    title={l.title}
+                    cover={cover}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );
