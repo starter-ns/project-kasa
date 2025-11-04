@@ -22,11 +22,11 @@ export default function HomePage() {
     <section className="home">
       {/* hero / banner */}
       <div className="home__banner-wrapper">
-  <Banner
-    title="At home, everywhere, and anywhere"
-    imageUrl={bannerPic}
-  />
-</div>
+        <Banner
+          title="At home, everywhere, and anywhere"
+          imageUrl={bannerPic}
+        />
+      </div>
 
       {/* listings */}
       <div className="home__cards-area">

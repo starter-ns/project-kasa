@@ -52,6 +52,7 @@
   position: relative;
   z-index: 1;
   padding-inline: 16px;
+  margin: 0 auto;
 }
 
 .home-banner__text {
@@ -107,7 +108,7 @@
 /* DESKTOP (>=1024px)        */
 /* ========================= */
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
 
   .home {
     gap: 32px;
@@ -120,6 +121,10 @@
     display: flex;
     justify-content: center;
     padding: 0;
+  }
+  .home__banner{
+    max-width: 1240px;
+    width: 100%;
   }
 
   /* DESKTOP BANNER OVERRIDE */
