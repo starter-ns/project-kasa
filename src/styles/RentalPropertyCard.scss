@@ -26,13 +26,11 @@
   &__slider-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(10, 10, 10, 0) 42%,
-      rgba(4, 4, 4, 0.205) 99.99%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(10, 10, 10, 0) 42%,
+        rgba(4, 4, 4, 0.205) 99.99%,
+        rgba(0, 0, 0, 0.5) 100%);
     pointer-events: none;
   }
 
@@ -101,10 +99,13 @@
 
   &__row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
+    flex-direction: column;
+    /* 👈 stack vertically */
+    align-items: flex-start;
+    /* keep left aligned, or use center / flex-end */
+    margin-bottom: 16px;
   }
+
 
   &__host {
     display: flex;
@@ -113,9 +114,9 @@
   }
 
   &__host-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    color: #FF6060;
     text-align: right;
   }
 
@@ -137,37 +138,159 @@
     line-height: 1.4;
   }
 }
+
+/* mobile: stars left, host right */
+.rental-card__info-right {
+  display: flex;
+  flex-direction: row-reverse;
+  /* flips host/stars visually */
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* make sure stars line up nicely */
+.rental-card__rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+/* host block stays compact on the right */
+.rental-card__host {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rental-card__host-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #FF6060;
+  text-align: right;
+  overflow-wrap: break-word;
+  max-width: 75px;
+}
+
 /* Desktop overrides */
 @media (min-width: 1024px) {
   .rental-card {
-    width: 1240px;        /* <-- fix: pxpx -> px */
-    margin: 0 auto;       /* keep centered */
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
 
     &__slider {
-      width: 100%;        /* match card width */
-      height: 415px;      /* like your mock */
+      width: 100%;
+      height: 415px;
       border-radius: 25px;
       margin: 24px 0;
       overflow: hidden;
     }
 
-    &__title { font-size: 36px; margin-bottom: 8px; }
-    &__location { font-size: 18px; margin-bottom: 16px; }
-
-    /* header row under slider: left/right spacing */
-    &__row {
-      align-items: flex-start;
-      justify-content: space-between;
+    &__accordion-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr; // Description | Amenities
       gap: 24px;
-      margin-bottom: 16px;
+      margin-top: 32px;
+      width: 100%;
+      align-items: start;
     }
 
-    /* tags a bit bigger */
-    &__tag-pill { font-size: 14px; padding: 8px 18px; }
 
-    /* host on the right, bigger avatar */
-    &__host { flex-direction: row-reverse; gap: 12px; }
-    &__host-name { font-size: 18px; line-height: 1.2; max-width: 140px; }
-    &__host-avatar { width: 64px; height: 64px; }
+    &__title {
+      font-size: 36px;
+      margin-bottom: 8px;
+      color: #FF6060;
+    }
+
+    &__location {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #000;
+    }
+
+    &__tag-pill {
+      font-size: 14px;
+      padding: 8px 18px;
+    }
+
+    /* -------------------------------------- */
+    /* LAYOUT FOR TITLE + HOST/STARS ROW      */
+    /* -------------------------------------- */
+
+    &__row {
+      display: flex;
+      flex-direction: row;
+      /* back to horizontal */
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* left column (title/location/tags) */
+    &__info-left {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* right column (host info + stars) */
+    &__info-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      min-width: 200px;
+      /* prevents collapsing */
+    }
+
+    /* host info block (name + avatar) */
+    &__host {
+      height: 64px;
+      width: 167px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    
+
+    &__host-name {
+      font-size: 18px;
+      font-weight: 500;
+      color: #FF6060;
+      text-align: right;
+      overflow-wrap: break-word;
+      max-width: 120px;
+    }
+
+    &__host-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
   }
+
+  /* rating stars under host, right-aligned */
+  .rating-stars {
+    width: 196px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 21px;
+
+  }
+
+  .rating-stars img {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+}
+.rental-card__slider-arrow-icon{
+  width: 46.68px;
+  height: 79.19px;
 }

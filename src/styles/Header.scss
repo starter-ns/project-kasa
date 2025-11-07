@@ -1,0 +1,55 @@
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  &__logo {
+    width: 145px;
+    height: 46.88px;
+    display: block;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__link {
+    color: #000;
+    font-weight: 500;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &--active {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* desktop scaling */
+@media (min-width: 1024px) {
+  .site-header {
+    padding: 32px 24px;
+
+    &__nav {
+      gap: 32px;
+    }
+
+    &__link {
+      font-size: 24px; /* 👈 desktop font size */
+    }
+  }
+}
+
+

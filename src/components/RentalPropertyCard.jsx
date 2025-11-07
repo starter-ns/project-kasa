@@ -135,79 +135,89 @@ export default function RentalPropertyCard({
         )}
       </div>
 
-      {/* Title + location */}
-      <h1 className="rental-card__title">{title}</h1>
-
-      <p className="rental-card__location">{location}</p>
-
-      {/* Tags */}
-      {Array.isArray(tags) && tags.length > 0 && (
-        <div className="rental-card__tags">
-          {tags.map((tag, i) => (
-            <span key={`${tag}-${i}`} className="rental-card__tag-pill">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Rating + host row */}
+            {/* title / location / tags / host / rating block */}
       <div className="rental-card__row">
-        {/* Rating using the extracted component */}
-        <RatingStars rating={rating} />
+        {/* LEFT SIDE: title / location / tags */}
+        <div className="rental-card__info-left">
+          <h1 className="rental-card__title">{title}</h1>
 
-        {/* Host info */}
-        <div className="rental-card__host">
-          {hostName && (
-            <span className="rental-card__host-name">
-              {hostName}
-            </span>
-          )}
+          <p className="rental-card__location">{location}</p>
 
-          {hostPicture && (
-            <img
-              src={normalizeUrl(hostPicture)}
-              alt={hostName || "Host"}
-              className="rental-card__host-avatar"
-            />
+          {Array.isArray(tags) && tags.length > 0 && (
+            <div className="rental-card__tags">
+              {tags.map((tag, i) => (
+                <span
+                  key={`${tag}-${i}`}
+                  className="rental-card__tag-pill"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           )}
+        </div>
+
+        {/* RIGHT SIDE: host info + stars */}
+        <div className="rental-card__info-right">
+          <div className="rental-card__host">
+            {hostName && (
+              <span className="rental-card__host-name">
+                {hostName}
+              </span>
+            )}
+
+            {hostPicture && (
+              <img
+                src={normalizeUrl(hostPicture)}
+                alt={hostName || "Host"}
+                className="rental-card__host-avatar"
+              />
+            )}
+          </div>
+
+          <div className="rental-card__rating">
+            <RatingStars rating={rating} />
+          </div>
         </div>
       </div>
 
-      {/* Description accordion */}
-      <Accordion
-        title="Description"
-        open={open.desc}
-        onToggle={() => toggle("desc")}
-        color="#FF6060"
-        caretIcon={Vector}
-      >
-        {description || "—"}
-      </Accordion>
 
-      {/* Amenities accordion */}
-      <Accordion
-        title="Amenities"
-        open={open.equip}
-        onToggle={() => toggle("equip")}
-        color="#FF6060"
-        caretIcon={Vector}
-      >
-        {Array.isArray(equipments) && equipments.length > 0 ? (
-          <ul className="rental-card__equip-list">
-            {equipments.map((item, idx) => (
-              <li
-                key={`${item}-${idx}`}
-                className="rental-card__equip-item"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          "—"
-        )}
-      </Accordion>
+            {/* Description + Amenities accordions */}
+      <div className="rental-card__accordion-row">
+        <Accordion
+          title="Description"
+          open={open.desc}
+          onToggle={() => toggle("desc")}
+          color="#FF6060"
+          caretIcon={Vector}
+        >
+          {description || "—"}
+        </Accordion>
+
+        <Accordion
+          title="Amenities"
+          open={open.equip}
+          onToggle={() => toggle("equip")}
+          color="#FF6060"
+          caretIcon={Vector}
+        >
+          {Array.isArray(equipments) && equipments.length > 0 ? (
+            <ul className="rental-card__equip-list">
+              {equipments.map((item, idx) => (
+                <li
+                  key={`${item}-${idx}`}
+                  className="rental-card__equip-item"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            "—"
+          )}
+        </Accordion>
+      </div>
+
     </article>
   );
 }

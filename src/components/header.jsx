@@ -1,47 +1,30 @@
-// src/components/Header.jsx
 import { NavLink } from "react-router-dom";
-import logo from "../assets/phoneLogo.svg"; // note: path goes up one level from components → assets
+import logo from "../assets/phoneLogo.svg";
+import "../styles/Header.scss"; // 👈 import stylesheet
 
 export default function Header() {
   return (
-    <header
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "16px 24px",
-      }}
-    >
-      <NavLink
-        to="/"
-        aria-label="Kasa home"
-        style={{ display: "inline-flex", alignItems: "center" }}
-      >
-        <img src={logo} alt="Kasa" style={{ height: 46.88, width: 145 }} />
+    <header className="site-header">
+      <NavLink to="/" aria-label="Kasa home" className="site-header__brand">
+        <img src={logo} alt="Kasa" className="site-header__logo" />
       </NavLink>
 
-      <nav style={{ display: "flex", gap: 16 }}>
+      <nav className="site-header__nav">
         <NavLink
           to="/"
           end
-          style={({ isActive }) => ({
-            textDecoration: isActive ? "underline" : "none",
-            color: "#000",
-            fontWeight: 500,
-            fontSize: 12,
-          })}
+          className={({ isActive }) =>
+            "site-header__link" + (isActive ? " site-header__link--active" : "")
+          }
         >
           Home
         </NavLink>
 
         <NavLink
           to="/about"
-          style={({ isActive }) => ({
-            textDecoration: isActive ? "underline" : "none",
-            color: "#000",
-            fontWeight: 500,
-            fontSize: 12,
-          })}
+          className={({ isActive }) =>
+            "site-header__link" + (isActive ? " site-header__link--active" : "")
+          }
         >
           About
         </NavLink>
