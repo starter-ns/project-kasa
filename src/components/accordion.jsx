@@ -10,7 +10,7 @@ export default function Accordion({
   children,
 }) {
   return (
-    <section className="accordion">
+    <section className={`accordion ${open ? "accordion--open" : ""}`}>
       <button
         className="accordion__button"
         onClick={onToggle}
@@ -32,20 +32,18 @@ export default function Accordion({
           <img
             src={caretIcon}
             alt=""
-            className={`accordion__caret ${open ? "accordion__caret--open" : ""}`}
+            className={`accordion__caret ${
+              open ? "accordion__caret--open" : ""
+            }`}
           />
         )}
       </button>
 
-      <div
-        className="accordion__panel-wrapper"
-        style={{ maxHeight: open ? 600 : 0 }}
-      >
-        {open && (
-          <div className="accordion__panel">
-            {children}
-          </div>
-        )}
+      {/* 👇 no inline maxHeight, no conditional rendering */}
+      <div className="accordion__panel-wrapper">
+        <div className="accordion__panel">
+          {children}
+        </div>
       </div>
     </section>
   );

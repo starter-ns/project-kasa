@@ -93,7 +93,9 @@ export default function AboutPage() {
 }
 
 // one accordion block
-function AboutAccordion({ title, isOpen, onToggle, caretIcon, children }) {
+// pseudo-code example
+
+function AboutAccordion({ title, isOpen, onToggle, children }) {
   return (
     <div className={`about-acc ${isOpen ? "about-acc--open" : ""}`}>
       <button
@@ -103,17 +105,19 @@ function AboutAccordion({ title, isOpen, onToggle, caretIcon, children }) {
       >
         <span className="about-acc__title">{title}</span>
         <img
-          src={caretIcon}
+          src={Vector}
           alt=""
-          className={`about-acc__caret ${isOpen ? "about-acc__caret--open" : ""}`}
+          className={`about-acc__caret ${
+            isOpen ? "about-acc__caret--open" : ""
+          }`}
         />
       </button>
 
-      {isOpen && (
-        <div className="about-acc__panel">
-          {children}
-        </div>
-      )}
+      {/* 👇 ALWAYS rendered, class controls animation */}
+      <div className="about-acc__panel">
+        <p>{children}</p>
+      </div>
     </div>
   );
 }
+

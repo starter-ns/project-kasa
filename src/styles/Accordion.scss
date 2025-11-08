@@ -30,23 +30,43 @@
     width: 12px;
     height: 12px;
     transition: transform 0.2s;
+
     &--open {
       transform: rotate(180deg);
     }
   }
 
+  /* wrapper around panel (for height animation) */
   &__panel-wrapper {
     overflow: hidden;
-    transition: max-height 0.25s ease;
+    max-height: 0;                        /* closed by default */
     background: #f9f9f9;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 5px 5px;
+    transition: max-height 0.25s ease;    /* smooth slide */
   }
 
+  /* the content itself */
   &__panel {
-    padding: 12px 14px;
+    padding: 0 14px;                      /* no vertical padding when closed */
     color: #000;
     font-size: 14px;
     font-weight: 500;
     line-height: 143%;
+    opacity: 0;
+    transition:
+      opacity 0.25s ease,
+      padding 0.25s ease;
+  }
+}
+
+/* when accordion is open */
+.accordion.accordion--open {
+  .accordion__panel-wrapper {
+    max-height: 400px;         /* big enough for your content */
+  }
+
+  .accordion__panel {
+    padding: 12px 14px;        /* restore vertical padding */
+    opacity: 1;
   }
 }

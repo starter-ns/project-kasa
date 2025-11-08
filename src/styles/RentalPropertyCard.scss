@@ -128,15 +128,18 @@
     display: block;
   }
 
-  &__equip-list {
+    &__equip-list {
     margin: 0;
-    padding-left: 18px;
+    padding-left: 0;       /* remove indentation */
+    list-style: none;      /* 🚫 remove bullet points */
   }
 
   &__equip-item {
     font-size: 14px;
     line-height: 1.4;
+    padding-left: 0;       /* make sure no extra spacing left */
   }
+
 }
 
 /* mobile: stars left, host right */
@@ -273,6 +276,10 @@
       object-fit: cover;
       display: block;
     }
+    &__slider-arrow-icon{
+  width: 46.68px;
+  height: 79.19px;
+}
   }
 
   /* rating stars under host, right-aligned */
@@ -289,8 +296,4 @@
     height: 24px;
     display: block;
   }
-}
-.rental-card__slider-arrow-icon{
-  width: 46.68px;
-  height: 79.19px;
 }

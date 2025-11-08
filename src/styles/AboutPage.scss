@@ -11,14 +11,35 @@
   }
 }
 
-/* Banner at top */
+/* ========================= */
+/* Banner at top             */
+/* ========================= */
+
 .about__banner {
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
   width: 335px;
   height: 111px;
   background: #d9d9d9;
-  margin: 0px auto;
+  margin: 0 auto;
+
+  /* dark overlay with your settings */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #000000;
+    opacity: 0.3;
+    mix-blend-mode: darken;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    width: 1240px;
+    height: 223px;
+    border-radius: 25px;
+  }
 }
 
 .about__banner-img {
@@ -28,15 +49,17 @@
   display: block;
 }
 
-/* Wrapper for all accordions */
+/* ========================= */
+/* Accordions (mobile)       */
+/* ========================= */
+
 .about__accordions {
   display: grid;
   row-gap: 16px;
 }
 
-/* Each accordion block */
 .about-acc {
-  border-radius: 6px;
+  border-radius: 5px;
   overflow: hidden;
   background: transparent;
   width: 335px;
@@ -44,20 +67,18 @@
 
   &--open {
     background: #f9f9f9;
-    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 }
 
-/* Accordion header bar (the coral part) */
+/* header bar */
 .about-acc__header {
   width: 335px;
   background: #ff6060;
   color: #fff;
   border: 0;
   border-radius: 6px;
-  margin: 0px auto;
+  margin: 0 auto;
 
-  /* mobile: fixed height + perfect centering */
   height: 30px;
   padding: 0 12px;
   display: flex;
@@ -70,11 +91,10 @@
   line-height: 1;
 
   .about-acc--open & {
-    border-radius: 6px 6px 0 0;
+    border-radius: 5px;
   }
 }
 
-/* Title text in the bar */
 .about-acc__title {
   display: inline-flex;
   align-items: center;
@@ -85,7 +105,6 @@
   line-height: 1;
 }
 
-/* Caret (the vector arrow) */
 .about-acc__caret {
   width: 12px;
   height: 12px;
@@ -98,20 +117,34 @@
   }
 }
 
-/* Panel content (when open) */
+/* === PANEL with animation (mobile) === */
 .about-acc__panel {
   background: #f9f9f9;
-  border-radius: 0 0 6px 6px;
-  padding: 12px 14px;
-
+  border-radius: 5px;
   color: #000;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.43;
   text-align: left;
+
+  overflow: hidden;      /* hide while animating */
+  max-height: 0;         /* closed */
+  padding: 0 14px;       /* no vertical padding closed */
+  opacity: 0;
+
+  transition:
+    max-height 0.25s ease,
+    opacity 0.25s ease,
+    padding 0.25s ease;
 }
 
-/* Text inside panel */
+/* open state */
+.about-acc--open .about-acc__panel {
+  max-height: 300px;       /* enough for content on mobile */
+  padding: 12px 14px;
+  opacity: 1;
+}
+
 .about-acc__panel p {
   margin: 0;
 }
@@ -128,33 +161,23 @@
     padding-bottom: 48px;
   }
 
-  .about__banner {
-    max-width: 1240px;
-    width: 100%;
-    height: 223px;
-    border-radius: 25px;
-  }
-
   .about__accordions {
     row-gap: 24px;
     display: grid;
     justify-items: center;
   }
 
-  /* container for each accordion */
   .about-acc {
     width: 1023px;
     border-radius: 10px;
     overflow: hidden;
     background: #f9f9f9;
-    border: 1px solid transparent; /* remove the visible border line */
+    border: 1px solid transparent;
 
     &--open {
-      border: 1px solid rgba(0, 0, 0, 0.05);
     }
   }
 
-  /* header bar */
   .about-acc__header {
     width: 100%;
     height: 52px;
@@ -162,7 +185,7 @@
     background: #ff6060;
     color: #fff;
     border: none;
-    border-radius: 10px 10px 0 0; /* top corners only */
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -172,16 +195,9 @@
     line-height: 1.2;
   }
 
-  /* caret and title same as before */
   .about-acc__caret {
     width: 20px;
     height: 20px;
-    transition: transform 0.2s;
-    transform: rotate(0deg);
-
-    &--open {
-      transform: rotate(180deg);
-    }
   }
 
   .about-acc__title {
@@ -190,16 +206,20 @@
     font-weight: 600;
   }
 
-  /* panel below */
+  /* desktop: same animation logic, just larger padding / height */
   .about-acc__panel {
-    background: #f9f9f9;
-    border-radius: 0 0 10px 10px;
-    padding: 20px;
+    border-radius: 0 0 5px 5px;
     font-size: 16px;
     line-height: 1.5;
-    font-weight: 500;
-    color: #000;
-    text-align: left;
-    margin-top: -1px; /* 👈 removes the tiny gap between header and panel */
+    margin-top: -1px;
+    max-height: 0;
+    padding: 0 20px;
+    opacity: 0;
+  }
+
+  .about-acc--open .about-acc__panel {
+    max-height: 400px;   /* more room for text */
+    padding: 20px;
+    opacity: 1;
   }
 }
