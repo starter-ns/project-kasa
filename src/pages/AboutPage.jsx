@@ -115,8 +115,9 @@ function AboutAccordion({ title, isOpen, onToggle, children }) {
 
       {/* 👇 ALWAYS rendered, class controls animation */}
       <div className="about-acc__panel">
-        <p>{children}</p>
-      </div>
+  {children}
+</div>
+
     </div>
   );
 }
