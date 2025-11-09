@@ -90,11 +90,11 @@
   &__tag-pill {
     background: #ff6060;
     color: #fff;
-    border-radius: 10px;
-    padding: 6px 10px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1;
+    border-radius: 5px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 143%;
   }
 
   &__row {
@@ -135,7 +135,8 @@
   }
 
   &__equip-item {
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 400;
     line-height: 1.4;
     padding-left: 0;       /* make sure no extra spacing left */
   }
@@ -216,8 +217,17 @@
 
     &__tag-pill {
       font-size: 14px;
-      padding: 8px 18px;
+      padding: 2.5px 18px;
+      font-weight: 700;
+      line-height: 143%;
+      border-radius: 10px;
     }
+    &__equip-item {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 143%;
+    padding-left: 0;       /* make sure no extra spacing left */
+  }
 
     /* -------------------------------------- */
     /* LAYOUT FOR TITLE + HOST/STARS ROW      */

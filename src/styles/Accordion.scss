@@ -6,7 +6,7 @@
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 12px 14px;
+    padding: 7.5px 14px;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -19,6 +19,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
   }
 
   &__left-icon {
@@ -58,6 +60,13 @@
       padding 0.25s ease;
   }
 }
+.accordion__panel {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 143%;
+    padding: 12px 14px;        /* restore vertical padding */
+    opacity: 1;
+  }
 
 /* when accordion is open */
 .accordion.accordion--open {
@@ -65,8 +74,26 @@
     max-height: 400px;         /* big enough for your content */
   }
 
+}
+@media (min-width: 1024px) {
   .accordion__panel {
-    padding: 12px 14px;        /* restore vertical padding */
-    opacity: 1;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 143%;
+  }
+
+.accordion__left {
+    font-size: 18px;
+    font-weight: 700;
+  }
+.accordion__caret {
+    width: 24px;
+    height: 13.7px;
+  }
+  .accordion__button {
+    width: 100%;
+    border-radius: 10px;
+    padding: 15.5px 20px 15.5px 10px;
+    
   }
 }
