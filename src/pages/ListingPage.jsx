@@ -1,8 +1,7 @@
 // src/pages/Listing.jsx
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
- import RentalPropertyCard from "../components/RentalPropertyCard.jsx";
-
+import RentalPropertyCard from "../components/RentalPropertyCard.jsx";
 
 export default function ListingPage() {
   const { id } = useParams(); // string
@@ -16,15 +15,19 @@ export default function ListingPage() {
       })
       .then((all) => {
         const raw = all.find((x) => String(x.id) === String(id)) || null;
+        // FIXME was here → now we actually handle "not found" via redirect
         setListing(raw);
       })
       .catch(() => setListing(null));
   }, [id]);
 
   if (listing === undefined) return <p>Loading…</p>;
-  if (listing === null) return <p>Listing not found.</p>;
 
-  // very light “parsing” inline (no extra files)
+  // if not found → redirect to your 404 page
+  if (listing === null) {
+    return <Navigate to="/404" replace />;
+  }
+
   const imageUrl =
     (Array.isArray(listing.pictures) && listing.pictures[0]) ||
     listing.cover ||
@@ -32,24 +35,17 @@ export default function ListingPage() {
     "";
 
   return (
-  <RentalPropertyCard
-    title={listing.title}
-    location={listing.location}
-    description={listing.description}
-    imageUrl={
-      (Array.isArray(listing.pictures) && listing.pictures[0]) ||
-      listing.cover ||
-      listing.image ||
-      ""
-    }
-    rating={listing.rating}
-    tags={listing.tags}
-    equipments={listing.equipments}
-    hostName={listing.host?.name}        // 👈 add
-    hostPicture={listing.host?.picture}  // 👈 add
-    pictures={listing.pictures}
-  />
-);
-
-
+    <RentalPropertyCard
+      title={listing.title}
+      location={listing.location}
+      description={listing.description}
+      imageUrl={imageUrl}
+      rating={listing.rating}
+      tags={listing.tags}
+      equipments={listing.equipments}
+      hostName={listing.host?.name}
+      hostPicture={listing.host?.picture}
+      pictures={listing.pictures}
+    />
+  );
 }

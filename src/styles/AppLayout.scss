@@ -1,0 +1,24 @@
+/* make sure the root fills the viewport */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* main app shell */
+.app-layout {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* main content: grows to push footer down */
+.app-layout__main {
+  flex: 1;                /* take available space */
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 16px 40px;   /* horizontal + bottom spacing, edit if you like */
+}

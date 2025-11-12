@@ -163,13 +163,13 @@
 @media (min-width: 1024px) {
   .about {
     max-width: 1240px;
-    row-gap: 32px;
-    padding-top: 32px;
-    padding-bottom: 48px;
+    width: 100%;
+    row-gap: 38px;
+    padding: 0 0 48px 0;
   }
 
   .about__accordions {
-    row-gap: 24px;
+    row-gap: 30px;
     display: grid;
     justify-items: center;
   }
