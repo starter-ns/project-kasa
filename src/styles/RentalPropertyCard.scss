@@ -1,5 +1,4 @@
 .rental-card {
-  padding: 16px;
   margin: 0 auto;
   width: 335px;
 
@@ -100,9 +99,7 @@
   &__row {
     display: flex;
     flex-direction: column;
-    /* 👈 stack vertically */
     align-items: flex-start;
-    /* keep left aligned, or use center / flex-end */
     margin-bottom: 16px;
   }
 
@@ -130,15 +127,15 @@
 
     &__equip-list {
     margin: 0;
-    padding-left: 0;       /* remove indentation */
-    list-style: none;      /* 🚫 remove bullet points */
+    padding-left: 0;
+    list-style: none;
   }
 
   &__equip-item {
     font-size: 12px;
     font-weight: 400;
     line-height: 1.4;
-    padding-left: 0;       /* make sure no extra spacing left */
+    padding-left: 0;
   }
 
 }
@@ -184,6 +181,7 @@
     max-width: 1240px;
     width: 100%;
     margin: 0 auto;
+    padding: 0;
 
     &__slider {
       width: 100%;
@@ -195,7 +193,7 @@
 
     &__accordion-row {
       display: grid;
-      grid-template-columns: 1fr 1fr; // Description | Amenities
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
       margin-top: 32px;
       width: 100%;
@@ -226,7 +224,7 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 143%;
-    padding-left: 0;       /* make sure no extra spacing left */
+    padding-left: 0;
   }
 
     /* -------------------------------------- */
@@ -234,11 +232,9 @@
     /* -------------------------------------- */
 
     &__row {
-      display: flex;
-      flex-direction: row;
-      /* back to horizontal */
-      justify-content: space-between;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
       gap: 24px;
       margin-bottom: 24px;
     }
@@ -256,7 +252,6 @@
       align-items: flex-end;
       gap: 12px;
       min-width: 200px;
-      /* prevents collapsing */
     }
 
     /* host info block (name + avatar) */

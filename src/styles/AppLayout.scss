@@ -20,5 +20,9 @@ body,
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0 16px 40px;   /* horizontal + bottom spacing, edit if you like */
+  padding: 0;   /* horizontal + bottom spacing, edit if you like */
 }
+@media (min-width: 1024px) {
+  .app-layout__main{
+padding: 0 16px 40px 16px;}
+  }

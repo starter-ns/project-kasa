@@ -42,10 +42,10 @@
   .site-header {
     max-width: 1240px;  /* 🔥 same width as your content */
     margin: 0 auto;     /* 🔥 center the whole header block */
-    padding: 45px 0 38px 0; /* a bit more vertical space on desktop */
+    padding: 45px 16px 38px 16px; /* a bit more vertical space on desktop */
     &__logo {
-    width: 145px;
-    height: 46.88px;
+    width: 210px;
+    height: 68px;
   }
 }
 

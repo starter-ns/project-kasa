@@ -4,8 +4,8 @@ import Vector from "../assets/Vector.svg";
 import ArrowPrev from "../assets/arrow_previous.svg";
 import ArrowNext from "../assets/arrow_forward.svg";
 
-import RatingStars from "./ratingStars.jsx";
-import Accordion from "./accordion.jsx";
+import RatingStars from "../components/ratingStars.jsx";
+import Accordion from "../components/accordion.jsx";
 
 import "../styles/RentalPropertyCard.scss";
 
@@ -36,8 +36,8 @@ export default function RentalPropertyCard({
       Array.isArray(pictures) && pictures.length > 0
         ? pictures
         : imageUrl
-        ? [imageUrl]
-        : [];
+          ? [imageUrl]
+          : [];
     return arr.map(normalizeUrl).filter(Boolean);
   }, [pictures, imageUrl]);
 
@@ -135,7 +135,7 @@ export default function RentalPropertyCard({
         )}
       </div>
 
-            {/* title / location / tags / host / rating block */}
+      {/* title / location / tags / host / rating block */}
       <div className="rental-card__row">
         {/* LEFT SIDE: title / location / tags */}
         <div className="rental-card__info-left">
@@ -182,7 +182,7 @@ export default function RentalPropertyCard({
       </div>
 
 
-            {/* Description + Amenities accordions */}
+      {/* Description + Amenities accordions */}
       <div className="rental-card__accordion-row">
         <Accordion
           title="Description"

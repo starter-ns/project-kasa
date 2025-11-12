@@ -1,22 +1,18 @@
 // src/components/Footer.jsx
-import whiteLogo from "../assets/white-logo.svg"; // one level up to /assets
+import whiteLogo from "../assets/white-logo.svg";
+import "../styles/Footer.scss"; // 👈 add this line
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        background: "#000",
-        color: "#fff",
-        textAlign: "center",
-        padding: "32px 16px",
-      }}
-    >
-      <img
-        src={whiteLogo}
-        alt="Kasa"
-        style={{ height: 30, marginBottom: 8 }}
-      />
-      <p>© {new Date().getFullYear()} Kasa. All rights reserved</p>
+    <footer className="footer">
+      <div className="footer__inner">
+        <img src={whiteLogo} alt="Kasa" className="footer__logo" />
+
+        {/* the <br/> forces a line break on mobile; hidden on desktop via CSS */}
+        <p className="footer__copy">
+          © {new Date().getFullYear()} Kasa.<br />All rights reserved
+        </p>
+      </div>
     </footer>
   );
 }

@@ -32,9 +32,8 @@ export default function Accordion({
           <img
             src={caretIcon}
             alt=""
-            className={`accordion__caret ${
-              open ? "accordion__caret--open" : ""
-            }`}
+            className={`accordion__caret ${open ? "accordion__caret--open" : ""
+              }`}
           />
         )}
       </button>

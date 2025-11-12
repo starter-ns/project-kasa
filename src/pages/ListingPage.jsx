@@ -1,7 +1,7 @@
 // src/pages/Listing.jsx
 import { useParams, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RentalPropertyCard from "../components/RentalPropertyCard.jsx";
+import RentalPropertyCard from "./RentalPropertyCard.jsx";
 
 export default function ListingPage() {
   const { id } = useParams(); // string

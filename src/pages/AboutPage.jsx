@@ -107,16 +107,15 @@ function AboutAccordion({ title, isOpen, onToggle, children }) {
         <img
           src={Vector}
           alt=""
-          className={`about-acc__caret ${
-            isOpen ? "about-acc__caret--open" : ""
-          }`}
+          className={`about-acc__caret ${isOpen ? "about-acc__caret--open" : ""
+            }`}
         />
       </button>
 
       {/* 👇 ALWAYS rendered, class controls animation */}
       <div className="about-acc__panel">
-  {children}
-</div>
+        {children}
+      </div>
 
     </div>
   );
