@@ -1,7 +1,6 @@
 import StarRed from "../assets/ratingStar-red.svg";
 import StarGray from "../assets/ratingStar-grey.svg";
-
-import "../styles/RatingStars.scss";
+import "../styles/components/RatingStars.scss";
 
 function Star({ filled, size = 18 }) {
   return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Banner from "../components/Banner.jsx";
 import ListingCard from "../components/ListingCard.jsx";
 import bannerPic from "../assets/bannerPic.jpg";
-import "../styles/HomePage.scss";
+import "../styles/pages/HomePage.scss";
 
 export default function HomePage() {
   const [items, setItems] = useState([]);

@@ -1,4 +1,4 @@
-import "../styles/Accordion.scss";
+import "../styles/components/Accordion.scss";
 
 export default function Accordion({
   title,

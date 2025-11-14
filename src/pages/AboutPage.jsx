@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Vector from "../assets/Vector.svg";
 import aboutBanner from "../assets/aboutPageBanner.jpg";
-import "../styles/AboutPage.scss";
+import "../styles/pages/AboutPage.scss";
 
 export default function AboutPage() {
   // each panel has its own open/closed state

@@ -1,6 +1,6 @@
 // src/components/Footer.jsx
 import whiteLogo from "../assets/white-logo.svg";
-import "../styles/Footer.scss"; // 👈 add this line
+import "../styles/components/Footer.scss";
 
 export default function Footer() {
   return (

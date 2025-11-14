@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../styles/ListingCard.scss";
+import "../styles/components/ListingCard.scss";
 
 export default function ListingCard({ id, title, cover }) {
   return (

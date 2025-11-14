@@ -1,7 +1,7 @@
 // src/pages/Listing.jsx
 import { useParams, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import RentalPropertyCard from "./RentalPropertyCard.jsx";
+import RentalPropertyCard from "./RentalPropertyPage.jsx";
 
 export default function ListingPage() {
   const { id } = useParams(); // string
@@ -15,7 +15,7 @@ export default function ListingPage() {
       })
       .then((all) => {
         const raw = all.find((x) => String(x.id) === String(id)) || null;
-        // FIXME was here → now we actually handle "not found" via redirect
+    
         setListing(raw);
       })
       .catch(() => setListing(null));

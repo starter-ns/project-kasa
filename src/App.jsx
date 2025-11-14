@@ -1,8 +1,9 @@
 // src/App.jsx
 import { Outlet } from "react-router-dom";
-import Header from "./components/header.jsx";
-import Footer from "./components/footer.jsx";
-import "./styles/AppLayout.scss"; // 👈 add this line
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import "./styles/AppLayout.scss";
+
 
 export default function App() {
   return (

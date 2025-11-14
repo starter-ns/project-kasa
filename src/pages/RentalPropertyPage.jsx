@@ -4,10 +4,10 @@ import Vector from "../assets/Vector.svg";
 import ArrowPrev from "../assets/arrow_previous.svg";
 import ArrowNext from "../assets/arrow_forward.svg";
 
-import RatingStars from "../components/ratingStars.jsx";
-import Accordion from "../components/accordion.jsx";
+import RatingStars from "../components/RatingStars.jsx";
+import Accordion from "../components/Accordion.jsx";
 
-import "../styles/RentalPropertyCard.scss";
+import "../styles/pages/RentalPropertyPage.scss";
 
 export default function RentalPropertyCard({
   title,
